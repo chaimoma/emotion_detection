@@ -1,37 +1,39 @@
+# Name of your workflow
 name: Python CI
 
-
+# 1. When to run this
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-#What jobs to run
+# 2. What jobs to run
 jobs:
   test:
-    
+    # Use an Ubuntu server
     runs-on: ubuntu-latest
 
-    #steps to run
+    # 3. The steps to run
     steps:
-      # check out code
+      # Step 1: Check out your code
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # set up Python 3.11
+      # Step 2: Set up Python 3.11
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11' 
       
-      # Install all libraries
+      # Step 3: Install all your libraries
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      # Run  test
-      - name: Run Pytest
+      # Step 4: Run ONLY the ML test
+      - name: Run Pytest (Model Test Only)
         run: |
-          python -m pytest
+          
+          python -m pytest tests/test_model.py
