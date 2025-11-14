@@ -1,0 +1,21 @@
+# --- API Server ---
+fastapi
+uvicorn[standard]
+
+# --- Database (PostgreSQL) ---
+sqlalchemy
+psycopg2-binary
+
+# --- AI / Machine Learning / Data ---
+tensorflow
+opencv-python-headless
+scikit-learn
+pandas
+numpy
+Pillow
+
+# Development & Testing
+jupyter
+matplotlib
+pytest
+httpx
