@@ -1,13 +1,11 @@
 # Virtual Environment
 venv/
-
 # Python cache
 __pycache__/
 *.pyc
 .pytest_cache/
-# Data (Too large for Git - you deleted this, but keep the rule)
+# Data
 data/
-
 # Colab checkpoints
 .ipynb_checkpoints/
 testphotos
