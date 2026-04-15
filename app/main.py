@@ -9,9 +9,6 @@ import cv2
 import tensorflow as tf
 import numpy as np 
 
-
-
-
 # DATABASE HELPER
 def get_db():
     db=SessionLocal()
@@ -19,23 +16,15 @@ def get_db():
         yield db
     finally:
         db.close()
-
         
 app=FastAPI(title='Emotion Detection')
 Base.metadata.create_all(bind=engine) 
-
 # SET UP CONSTANTS & LOAD MODELS
 image_size=48
 class_names=['angry','disgusted','fearful','happy','neutral','sad','surprised']
-
 print('models loaded successfuly')
-
-
 model = tf.keras.models.load_model("saved_model/emotion_model.h5", compile=False)
 cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-
-
-
 # JSON RESPONSE MODEL
 class PredictionResponse(BaseModel):
     id:int
@@ -48,7 +37,6 @@ class PredictionResponse(BaseModel):
 # API ROUTE 1: /predict_emotion
 @app.post('/predict_emotion', response_model=PredictionResponse)
 async def predict_emotion(file:UploadFile=File(...),db: Session=Depends(get_db)):
-    
     file_byte= await file.read()
     np_array = np.frombuffer(file_byte, np.uint8)
     image=cv2.imdecode(np_array,cv2.IMREAD_COLOR) 
@@ -68,7 +56,6 @@ async def predict_emotion(file:UploadFile=File(...),db: Session=Depends(get_db))
     db.commit()
     db.refresh(db_prediction)
     return db_prediction
-
 # API ROUTE 2: 
 @app.get('/history', response_model=List[PredictionResponse])
 def get_prediction_history(db: Session=Depends(get_db)):
