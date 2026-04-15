@@ -14,8 +14,6 @@ print("Models loaded successfully!")
 # VideoCapture to open your video.
 cap = cv2.VideoCapture(0)
 print("Video file opened. Processing...")
-
-
 while True:
     # Read one frame from the video
     ret, frame = cap.read()
@@ -24,7 +22,6 @@ while True:
     if not ret:
         print("Video processing finished.")
         break
-        
     # Convert frame to grayscale
     gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
