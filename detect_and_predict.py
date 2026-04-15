@@ -12,10 +12,8 @@ print('models loaded successfully!')
 
 #laod and prepare the test photo
 img=cv2.imread('testphotos/test_image.jpg') 
-
 #convert photo to grayscale ( for haar cascade)
 gray_img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
 faces=face_cascade.detectMultiScale(
     gray_img,
     scaleFactor=1.1,
@@ -23,7 +21,6 @@ faces=face_cascade.detectMultiScale(
     minSize=(30,30)
 )
 print(f'founed {len(faces)} face(s)')
-
 for(x,y,w,h) in faces:
     #1-cut out the face from the grayscaler image
     face_roi_gray=gray_img[y:y+h,x:x+w]
