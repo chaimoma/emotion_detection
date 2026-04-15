@@ -2,9 +2,6 @@ from fastapi.testclient import TestClient
 from app.main import app 
 
 client = TestClient(app)
-
-
-
 def test_get_history_format(): 
     response = client.get("/history")
     assert response.status_code == 200, "API call to /history failed"
